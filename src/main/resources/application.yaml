@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: "example-service-telepresence"
+server:
+  servlet:
+    context-path: "/example-service-telepresence"
