@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.2'
     id 'io.spring.dependency-management' version '1.1.2'
+    id 'com.google.cloud.tools.jib' version '3.3.2'
 }
 
 group = 'com.example'
@@ -27,3 +28,17 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+bootJar {
+    archiveFileName = "example-service-telepresence.jar"
+}
+jib {
+    container {
+        jvmFlags = ['-Xms512m', '-Xdebug']
+        mainClass = 'com.exampleservice.telepresence.ExampleServiceTelepresenceApplication'
+        args = []
+        ports = ['8080/tcp']
+    }
+}
+jib.to.image = 'example-service-telepresence'
+jib.to.tags = [version]

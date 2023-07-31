@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: t22
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-service-telepresence
+  namespace: t22
+  labels:
+    app: example-service-telepresence
+    service: example-service-telepresence
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: example-service-telepresence
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-service-telepresence
+  namespace: t22
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: example-service-telepresence
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: example-service-telepresence
+        version: v1
+    spec:
+      containers:
+        - image: example-service-telepresence:v1
+          name: example-service-telepresence
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080

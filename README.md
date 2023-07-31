@@ -34,10 +34,12 @@ Two main capabilities:
 ## Let's demo it!
 
 ### Prerequisites
+- Java 17
+- **kubectl** or **oc** CLI installed and configured.
+- A Kubernetes cluster.
+  - Docker Desktop or Minikube if you want to install a single node cluster locally.
 
-
-### Example Spring Boot Service
-
+### Checkout and test the simple Spring Boot Service
 This repository contains a Spring Boot application which exposes a simple web API and returns a welcome message with
 the current services' version:
 
@@ -47,7 +49,40 @@ curl http://localhost:8080/example-service-telepresence/
 Hello from example-service-telepresence v1!
 ```
 
+### Create the docker image
 
+Create and push in the local container registry following these steps:
+- build a Docker image with Jib and push to the local container register using the following command: `` ./gradlew jibDockerBuild ``
+- run this command to check the images are present: `` docker images | grep example-service-telepresence ``
+- if you are using Minikube, load the image into it with the command: `` minikube image load example-service-telepresence:<version> ``
+
+### Deploy the example-service-telepresence to your K8s cluster
+
+#### Run the following command:
+```shell
+example-service-telepresence % kubectl apply -f k8s-manifests/deployment.yaml
+namespace/t22 created
+service/example-service-telepresence created
+deployment.apps/example-service-telepresence created
+```
+#### Check if everything is running with command:
+```shell
+example-service-telepresence % kubectl get all -n t22
+NAME                                                READY   STATUS    RESTARTS   AGE
+pod/example-service-telepresence-69df788d9f-gm5kt   1/1     Running   0          3s
+
+NAME                                   TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/example-service-telepresence   ClusterIP   10.107.104.105   <none>        8080/TCP   4s
+
+NAME                                           READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/example-service-telepresence   1/1     1            1           3s
+
+NAME                                                      DESIRED   CURRENT   READY   AGE
+replicaset.apps/example-service-telepresence-69df788d9f   1         1         1       3s
+```
+
+### Install Telepresence
+Install Telepresence on your machine and in your K8s cluster following this guide: https://www.telepresence.io/docs/latest/quick-start/
 
     
 
