@@ -21,15 +21,12 @@ Telepresence consists of two architecture components:
 - the client-side (CLI) telepresence binary
 - the cluster side (Kubernetes or Openshift) traffic-manager and traffic-agent.
 
+![TP Architecture](TP_Architecture.svg)
+
 Two main capabilities:
 - access to the remote K8s services as if they were running locally using the command `` telepresence connect``
 - route remote traffic to your local dev machine with the command `` telepresence intercept <service-name> ``
   - a proxy container is injected into the pods associated to the target services
-
-### More info
-- [Official doc](https://www.telepresence.io/)
-- [GitHub repository](https://github.com/telepresenceio/telepresence)
-- [Telepresence for Docker](https://www.docker.com/products/telepresence-for-docker/)
 
 ## Let's demo it!
 
@@ -193,7 +190,8 @@ This tool looks like really promising and helpful in our daily job since it migh
 - Ability to run large-scale applications that can't run locally
 
 ## Useful external resources
-- [Telepresence - Official doc](https://www.telepresence.io/)
--  [Telepresence - Quickstart](https://www.telepresence.io/docs/latest/quick-start)
-- [Telepresence - GitHub report](https://github.com/telepresenceio/telepresence)
+- [Official Documentation](https://www.telepresence.io/)
+-  [Quickstart](https://www.telepresence.io/docs/latest/quick-start)
+- [GitHub report](https://github.com/telepresenceio/telepresence)
 - [Kubernetes.io - Debug services](https://kubernetes.io/docs/tasks/debug/debug-cluster/local-debugging/)
+- [Telepresence for Docker](https://www.docker.com/products/telepresence-for-docker/)
