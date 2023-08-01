@@ -14,7 +14,7 @@ public class ExampleServiceTelepresenceController {
 
     @GetMapping
     public String home(){
-        return "Hello from " + buildProperties.getName() + " "  + buildProperties.getVersion() + "!";
+        return "Hello from " + buildProperties.getName() + " "  + buildProperties.getVersion() + "!\n";
     }
 
 }

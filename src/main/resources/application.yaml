@@ -4,3 +4,4 @@ spring:
 server:
   servlet:
     context-path: "/example-service-telepresence"
+  port: 9090
